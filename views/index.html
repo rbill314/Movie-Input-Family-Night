@@ -30,15 +30,7 @@
         <form action="/api/movies" method="get">
           <h3>User Catalogue</h3>
           <input type="submit" value="View" />
-        </form>
-        <p id="movieForm" />
-        <script>
-          $("#movieForm").click(() => {
-            $.get("/api/movies", (name, movie) => {
-              alert("Name: " + name + " Movie " + movie);
-            });
-          });
-        </script>
+        </form>        
       </div>
     </center>
   </body>

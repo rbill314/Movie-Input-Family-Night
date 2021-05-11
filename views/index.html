@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Movie List</title>
+    <meta
+      name="viewport"
+      content="width=device-width,height=device-height,initial-scale=1.0"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
@@ -12,26 +16,81 @@
 
   <body>
     <center>
-      <div class="container">
-        <h1>Movies to watch</h1>
-        <form action="/api/movies" method="post">
-          <h3>Enter name and movie</h3>
-          <input id="name" type="text" name="name" placeholder="Name*" />
-          <input id="movie" type="text" name="movie" placeholder="Movie*" />
-          <input
-            id="where"
-            type="text"
-            name="where"
-            placeholder="Where to Watch it*"
-          />
-          <input type="submit" value="Submit" />
-        </form>
-
-        <form action="/api/movies" method="get">
-          <h3>User Catalogue</h3>
-          <input type="submit" value="View" />
-        </form>        
-      </div>
+    <div class="container">
+      <table class="center">
+        <tr>
+          <th>
+            <h1>Movies to watch</h1>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <form action="/api/movies" method="post">
+              <h3>Enter name and movie</h3>
+              <input
+                class="text"
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Name*"
+              />
+              <input
+                class="text"
+                id="movie"
+                type="text"
+                name="movie"
+                placeholder="Movie*"
+              />
+              <input
+                class="text"
+                id="where"
+                type="text"
+                name="where"
+                placeholder="Where to Watch it*"
+              />
+              <input class="submit" type="submit" value="Submit" />
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form id="movieForm" action="/api/movies" method="get">
+              <h3>User Catalogue</h3>
+              <input class="submit" type="submit" value="View" />
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <form>
+              <input class="submit" type="submit" value="Reset" />
+              <code class="code" id="jsonResult"></code>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function() {
+        $("#movieForm").submit(e => {
+          e.preventDefault();
+          $.ajax({
+            url: "/api/movies",
+            type: "get",
+            data: $("#movieForm").serialize(),
+            success: d => {
+              $("#result").text(d.string || d);
+              $("#jsonResult").text(JSON.stringify(d));
+            }
+          });
+        });
+      });
+    </script>
     </center>
-  </body>
+  </body>  
 </html>

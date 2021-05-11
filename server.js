@@ -33,7 +33,8 @@ if (mongoose.connection.readyState) {
 const movieSchema = new mongoose.Schema({
   id: String,
   name: { type: String, required: true },
-  movie: { type: String, required: true }
+  movie: { type: String, required: true },
+  where: { type: String, required: true }
 });
 
 const Movies = mongoose.model("Movies", movieSchema);
@@ -45,7 +46,7 @@ app.post("/api/movies", (req, res) => {
   Movies.findOne({ movie: movie }, (err, found) => {
     if (err) return;
     if (found) {
-      res.send("Movie Already Entered");
+      res.send("Movie Already Entered")
     } else {
       const newUser = new Movies({
         name: name,
@@ -71,7 +72,7 @@ app.get("/api/movies", (req, res) => {
       });
       res.json(arr);
     }
-  });
+  })
 });
 
 const listener = app.listen(process.env.PORT || 3000, () => {

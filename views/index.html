@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie List</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <center>
+      <div class="container">
+        <h1>Movies to watch</h1>
+        <form action="/api/movies" method="post">
+          <h3>Enter name and movie</h3>
+          <input id="name" type="text" name="name" placeholder="Name*" />
+          <input id="movie" type="text" name="movie" placeholder="Movie*" />
+          <input
+            id="where"
+            type="text"
+            name="where"
+            placeholder="Where to Watch it*"
+          />
+          <input type="submit" value="Submit" />
+        </form>
+
+        <form action="/api/movies" method="get">
+          <h3>User Catalogue</h3>
+          <input type="submit" value="View" />
+        </form>
+        <p id="movieForm" />
+        <script>
+          $("#movieForm").click(() => {
+            $.get("/api/movies", (name, movie) => {
+              alert("Name: " + name + " Movie " + movie);
+            });
+          });
+        </script>
+      </div>
+    </center>
+  </body>
+</html>
